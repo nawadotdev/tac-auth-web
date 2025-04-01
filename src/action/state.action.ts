@@ -39,6 +39,8 @@ export const checkCode = async (state: string, code: string) => {
 
 export const markDownloaded = async (state: string) => {
 
+    await connectDb()
+
     const auth = await Auth.findOne({ state: state })
 
     if (!auth) {
