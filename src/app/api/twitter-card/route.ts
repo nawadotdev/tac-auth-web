@@ -1,21 +1,35 @@
-import { generateImage } from "@/action/image.action";
-import { NextRequest, NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const username = searchParams.get("username") || "TwitterUser";
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+    const { username } = req.query;
 
-  try {
-    const imageBuffer = await generateImage(username);
+    const redirectTo = "https://tac.build"
+    const imageUrl = `https://auth.tac.build/api/image?username=${username}`
+    const title = "TAC.Build"
+    const description = "TAC.Build"
 
-    return new NextResponse(imageBuffer, {
-      headers: {
-        "Content-Type": "image/jpeg",
-        "Cache-Control": "public, max-age=31536000, immutable",
-      },
-    });
-  } catch (error) {
-    console.error(`Error generating image: ${error}`);
-    return new NextResponse("Error generating image", { status: 500 });
-  }
+    res.setHeader("Content-Type", "text/html");
+
+    res.status(200).send(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="${title}">
+            <meta name="twitter:description" content="${description}">
+            <meta name="twitter:image" content="${imageUrl}">
+            <meta property="og:title" content="${title}">
+            <meta property="og:description" content="${description}">
+            <meta property="og:image" content="${imageUrl}">
+            <meta property="og:type" content="website">
+            <title>${title}</title>
+        </head>
+        <body>
+            <img src="${imageUrl}" alt="Image">
+            ${redirectTo ? `<script>window.location.href = "${redirectTo}";</script>` : ''}
+        </body>
+        </html>
+    `);
 }
