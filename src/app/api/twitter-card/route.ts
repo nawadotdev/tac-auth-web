@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function GET(req: NextApiRequest, res: NextApiResponse) {
     const { username } = req.query;
 
     const redirectTo = "https://tac.build"
