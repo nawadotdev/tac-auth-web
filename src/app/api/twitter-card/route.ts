@@ -4,7 +4,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const { username } = req.query;
 
     const redirectTo = "https://tac.build"
-    const imageUrl = `https://auth.tac.build/api/image?username=${username}`
+    const imageUrl = `https://link.tac.build/api/image?username=${username}`
     const title = "TAC.Build"
     const description = "TAC.Build"
 
