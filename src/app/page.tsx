@@ -16,33 +16,43 @@ function Home() {
   const state = useSearchParams().get("state")
   const code = useSearchParams().get("code")
 
-  const handleDownload = async () => {  
-    if(username === null || state === null) return
-    const image = await generateImage(username)
+  // const handleDownload = async () => {  
+  //   if(username === null || state === null) return
+  //   const image = await generateImage(username)
 
-    const blob = new Blob([image], { type: "image/png" })
+  //   const blob = new Blob([image], { type: "image/png" })
 
-    const url = URL.createObjectURL(blob)
+  //   const url = URL.createObjectURL(blob)
 
-    const link = document.createElement("a")
-    link.href = url
-    link.download = `tac-${username}.jpg`
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+  //   const link = document.createElement("a")
+  //   link.href = url
+  //   link.download = `tac-${username}.jpg`
+  //   document.body.appendChild(link)
+  //   link.click()
+  //   document.body.removeChild(link)
 
-    URL.revokeObjectURL(url)
-    await markDownloaded(state)
+  //   URL.revokeObjectURL(url)
+  //   await markDownloaded(state)
+  // }
+
+  const handleClick = async () => {
+    try {
+      if (username === null) return
+
+      await navigator.clipboard.writeText(`https://auth.tac.build/api/twitter-card?username=${username}`)
+    }catch(err){
+      console.error(err)
+    }
   }
 
   useEffect(() => {
     if (state === null || code === null) return
     const findRequest = async () => {
-      try{
+      try {
         const request = await checkCode(state, code)
         setUsername(request)
         setProcess("success")
-      }catch(err){
+      } catch (err) {
         setProcess("error")
       }
     }
@@ -78,13 +88,13 @@ function Home() {
             {process === "success" && (
               <div className="flex items-center space-y-4 flex-col">
                 <div className="flex items-center space-x-2">
-                  <MdOutlineDoneOutline size={24}/>
+                  <MdOutlineDoneOutline size={24} />
                   <p>Authenticated</p>
                 </div>
                 <button
-                  onClick={handleDownload}
+                  onClick={handleClick}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-700 active:bg-blue-300">
-                  Download Image
+                  Copy URL
                 </button>
               </div>
             )}

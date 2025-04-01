@@ -3,20 +3,18 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const username = searchParams.get("username") || "default_user";
+  const username = searchParams.get("username") || "TwitterUser";
 
   try {
     const imageBuffer = await generateImage(username);
 
     return new NextResponse(imageBuffer, {
-      status: 200,
       headers: {
         "Content-Type": "image/jpeg",
-        "Cache-Control": "public, max-age=3600",
+        "Cache-Control": "public, max-age=31536000, immutable",
       },
     });
   } catch (error) {
-    console.error("Twitter Card oluşturulurken hata:", error);
-    return NextResponse.json({ error: "Görsel oluşturulamadı" }, { status: 500 });
+    return new NextResponse("Error generating image", { status: 500 });
   }
 }
