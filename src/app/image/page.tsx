@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Head from "next/head";
 import { useSearchParams } from "next/navigation";
 
@@ -40,4 +40,8 @@ const TwitterCardPage = () => {
     );
 };
 
-export default TwitterCardPage;
+export default () => {
+    <Suspense>
+        <TwitterCardPage />
+    </Suspense>
+}
