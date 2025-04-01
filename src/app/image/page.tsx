@@ -40,8 +40,12 @@ const TwitterCardPage = () => {
     );
 };
 
-export default () => {
-    <Suspense>
-        <TwitterCardPage />
-    </Suspense>
+const Page = () => {
+    return (
+        <Suspense>
+            <TwitterCardPage />
+        </Suspense>
+    );
 }
+
+export default Page;
