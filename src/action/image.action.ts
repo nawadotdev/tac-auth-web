@@ -1,6 +1,8 @@
 "use server";
 import path from "path";
-import { createCanvas, loadImage } from "canvas";
+import { createCanvas, loadImage, registerFont } from "canvas";
+
+registerFont(path.resolve(process.cwd(), "public", "fonts", "DM-Sans.ttf"), { family: "DM Sans" });
 
 export const generateImage = async (username: string) => {
   const canvas = createCanvas(1920, 1080);
