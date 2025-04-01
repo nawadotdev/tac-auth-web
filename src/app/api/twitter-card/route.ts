@@ -1,16 +1,15 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from "next/server";
 
-export default function GET(req: NextApiRequest, res: NextApiResponse) {
-    const { username } = req.query;
+export async function GET(req: NextRequest) {
+    const { searchParams } = new URL(req.url);
+    const username = searchParams.get("username") || "TwitterUser";
 
     const redirectTo = "https://tac.build"
     const imageUrl = `https://link.tac.build/api/image?username=${username}`
     const title = "TAC.Build"
     const description = "TAC.Build"
 
-    res.setHeader("Content-Type", "text/html");
-
-    res.status(200).send(`
+    const hmtl = `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -31,5 +30,14 @@ export default function GET(req: NextApiRequest, res: NextApiResponse) {
             ${redirectTo ? `<script>window.location.href = "${redirectTo}";</script>` : ''}
         </body>
         </html>
-    `);
+    `;
+
+    const response = new NextResponse(hmtl, {
+        headers: {
+            "Content-Type": "text/html",
+            "Cache-Control": "public, max-age=0, must-revalidate",
+        },
+    });
+
+    return response;
 }
