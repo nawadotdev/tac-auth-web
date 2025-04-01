@@ -3,13 +3,13 @@
 import Auth from "@/models/Auth"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { FaSpinner } from "react-icons/fa"
 import { MdOutlineDoneOutline, MdWarningAmber } from "react-icons/md"
 import { checkCode, markDownloaded } from "@/action/state.action"
 import { generateImage } from "@/action/image.action"
 
-export default function Home() {
+function Home() {
   const [process, setProcess] = useState<"checking" | "success" | "error">("checking")
   const [username, setUsername] = useState<string | null>(null)
 
@@ -100,4 +100,12 @@ export default function Home() {
   )
 
 
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <Home />
+    </Suspense>
+  )
 }
