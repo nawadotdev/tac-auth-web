@@ -39,7 +39,7 @@ function Home() {
     try {
       if (username === null) return
 
-      await navigator.clipboard.writeText(`https://auth.tac.build/api/twitter-card?username=${username}`)
+      await navigator.clipboard.writeText(`https://link.tac.build/api/twitter-card?username=${username}`)
     }catch(err){
       console.error(err)
     }
