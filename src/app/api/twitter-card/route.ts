@@ -15,6 +15,7 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (error) {
+    console.error(`Error generating image: ${error}`);
     return new NextResponse("Error generating image", { status: 500 });
   }
 }
