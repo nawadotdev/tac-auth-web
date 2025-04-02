@@ -14,7 +14,6 @@ interface Oauth2TokenResponse {
 }
 
 export const getAccessToken = async (code: string, verifier : string) : Promise<string> => {
-
     const resp = await fetch("https://api.x.com/2/oauth2/token",{
         method: "POST",
         headers: {
@@ -60,5 +59,25 @@ export const getMe = async (token: string) : Promise<TwitterUser> => {
     const data = await resp.json() as GetMeResponse
 
     return data.data
+
+}
+
+export const getFollowers = async (token: string, userId: string) => {
+    console.log(token, userId)
+    const resp = await fetch(`https://api.x.com/2/users/${userId}/followers`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
+
+    if(!resp.ok) {
+        console.log(resp.statusText)
+        throw new Error("Failed to get followers")
+    }
+
+    const data = await resp.json()
+
+    return data
 
 }

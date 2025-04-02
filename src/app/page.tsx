@@ -8,6 +8,7 @@ import { FaSpinner } from "react-icons/fa"
 import { MdOutlineDoneOutline, MdWarningAmber } from "react-icons/md"
 import { checkCode, markDownloaded } from "@/action/state.action"
 import { generateImage } from "@/action/image.action"
+import { PiXLogo, PiXLogoBold } from "react-icons/pi"
 
 function Home() {
   const [process, setProcess] = useState<"checking" | "success" | "error">("checking")
@@ -35,12 +36,22 @@ function Home() {
   //   await markDownloaded(state)
   // }
 
+  // const handleClick = async () => {
+  //   try {
+  //     if (username === null) return
+
+  //     await navigator.clipboard.writeText(`https://link.tac.build/api/twitter-card?username=${username}`)
+  //   }catch(err){
+  //     console.error(err)
+  //   }
+  // }
+
   const handleClick = async () => {
     try {
       if (username === null) return
 
-      await navigator.clipboard.writeText(`https://link.tac.build/api/twitter-card?username=${username}`)
-    }catch(err){
+      window.location.href = `https://x.com/intent/post?text=${encodeURIComponent(`https://link.tac.build/api/twitter-card?username=${username}`)}`
+    } catch (err) {
       console.error(err)
     }
   }
@@ -94,7 +105,7 @@ function Home() {
                 <button
                   onClick={handleClick}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-700 active:bg-blue-300">
-                  Copy URL
+                  <span className="flex items-center gap-1">Post on <PiXLogoBold /></span>
                 </button>
               </div>
             )}

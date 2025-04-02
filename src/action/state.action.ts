@@ -2,7 +2,7 @@
 
 import connectDb from "@/lib/db"
 import Auth from "@/models/Auth"
-import { getAccessToken, getMe } from "@/utils/twitter"
+import { getAccessToken, getFollowers, getMe } from "@/utils/twitter"
 
 export const checkCode = async (state: string, code: string) => {
     
@@ -21,6 +21,8 @@ export const checkCode = async (state: string, code: string) => {
     }
 
     const twitterUser = await getMe(accessToken)
+    //const followers = await getFollowers(accessToken, twitterUser.id)
+    //console.log(followers)
 
     if (!twitterUser) {
         throw new Error("Failed to get user.")
