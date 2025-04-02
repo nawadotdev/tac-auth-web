@@ -50,7 +50,7 @@ function Home() {
     try {
       if (username === null) return
 
-      window.location.href = `https://x.com/intent/post?text=${encodeURIComponent(`https://link.tac.build/api/twitter-card?username=${username}`)}`
+      window.location.href = `https://x.com/intent/post?text=${encodeURIComponent(`https://link.tac.build/api/twitter-card?username=${username}  @TacBuild`)}`
     } catch (err) {
       console.error(err)
     }
