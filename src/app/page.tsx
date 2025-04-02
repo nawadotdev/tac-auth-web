@@ -49,8 +49,11 @@ function Home() {
   const handleClick = async () => {
     try {
       if (username === null) return
+      const tweetId = "1907548455779840058";
+      const text = "I am TAC Aligned @TacBuild";
+      const url = `https://x.com/intent/post?url=${encodeURIComponent(`https://x.com/user/status/${tweetId}`)}&text=${encodeURIComponent(text)}`;
 
-      window.location.href = `https://x.com/intent/post?text=${encodeURIComponent(`https://link.tac.build/api/twitter-card?username=${username}  @TacBuild`)}`
+      window.location.href = url
     } catch (err) {
       console.error(err)
     }
