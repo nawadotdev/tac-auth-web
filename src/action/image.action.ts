@@ -43,6 +43,7 @@ export const generateRiddleImage = async (username: string, avatarUrl: string | 
   const avatarX = 420 - avatarRadius;
   const avatarY = 150;
 
+  console.log("Avatar URL:", avatarUrl);
   if (avatarUrl) {
     try {
       const avatar = await downloadImage(avatarUrl);
