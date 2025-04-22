@@ -45,7 +45,7 @@ export const generateRiddleImage = async (username: string, avatarUrl: string | 
   ctx.fillText(`@${username}`, 600, 300);
 
   const pointsText = `777 XP`;
-  ctx.font = 'bold 54px "DM Sans"';
+  ctx.font = 'bold 56px "DM Sans"';
   const pointsTextMetrics = ctx.measureText(pointsText);
   const pointsPadding = 30;
   const pointsBoxWidth = pointsTextMetrics.width + pointsPadding * 2;
