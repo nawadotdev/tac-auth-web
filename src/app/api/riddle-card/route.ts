@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const username = searchParams.get("username") || "TwitterUser";
-
+    const avatarUrl = searchParams.get("avatarUrl");
     const redirectTo = "https://tac.build"
-    const imageUrl = `https://link.tac.build/api/riddle-image?username=${username}`
+    const imageUrl = `https://link.tac.build/api/riddle-image?username=${username}${avatarUrl ? `&avatarUrl=${avatarUrl}` : ""}`;
     const title = "TAC.Build"
     const description = "TAC.Build"
 
