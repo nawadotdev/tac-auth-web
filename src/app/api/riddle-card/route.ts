@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
     const username = searchParams.get("username") || "TwitterUser";
     const avatarUrl = searchParams.get("avatar");
     const redirectTo = "https://tac.build"
-    const imageUrl = `https://link.tac.build/api/riddle-image?username=${username}${avatarUrl ? `&avatarUrl=${avatarUrl}` : ""}`;
+    const imageUrl = `https://link.tac.build/api/riddle-image?username=${username}${avatarUrl ? `&avatar=${avatarUrl}` : ""}`;
     const title = "TAC.Build"
     const description = "TAC.Build"
 
