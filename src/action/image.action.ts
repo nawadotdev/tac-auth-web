@@ -74,5 +74,23 @@ export const generateRiddleImage = async (username: string, avatarUrl: string | 
   ctx.textAlign = 'left';
   ctx.fillText(`@${username}`, 600, 300);
 
+  const pointsText = `777 TAC Points`;
+  ctx.font = 'bold 54px "DM Sans"';
+  const pointsTextMetrics = ctx.measureText(pointsText);
+  const pointsPadding = 30;
+  const pointsBoxWidth = pointsTextMetrics.width + pointsPadding * 2;
+  const pointsBoxHeight = 80;
+  const pointsBoxX = 450;
+  const pointsBoxY = 650;
+
+  ctx.fillStyle = "#580C64";
+  ctx.roundRect(pointsBoxX, pointsBoxY, pointsBoxWidth, pointsBoxHeight, 20);
+  ctx.fill();
+
+  ctx.fillStyle = "#FFFFFF";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(pointsText, pointsBoxX + pointsBoxWidth / 2, pointsBoxY + pointsBoxHeight / 2);
+
   return canvas.toBuffer("image/png");
 }
