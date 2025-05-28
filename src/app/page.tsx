@@ -48,7 +48,10 @@ function Home() {
 
   const handleClick = async () => {
     try {
-      if (username === null) return
+      if (username === null) {
+        setProcess("error")
+        return
+      }
       const tweetId = "1907548455779840058";
       const text = "I am TAC Aligned @TacBuild";
       const url = `https://x.com/intent/post?url=${encodeURIComponent(`https://x.com/user/status/${tweetId}`)}&text=${encodeURIComponent(text)}`;
@@ -113,7 +116,7 @@ function Home() {
               </div>
             )}
             {process === "error" && (
-              <div className="flex items-center space-x-2 flex-col">
+              <div className="flex items-center space-x-2 flex-col text-red-500">
                 <MdWarningAmber size={24} />
                 <p>Authentication failed</p>
               </div>
