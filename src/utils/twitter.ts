@@ -24,7 +24,7 @@ export const getAccessToken = async (code: string, verifier : string) : Promise<
     })
 
     if(!resp.ok) {
-        throw new Error("Failed to get access token")
+        throw new Error(`Failed to get access token ${resp.statusText}`)
     }
 
     const data = await resp.json() as Oauth2TokenResponse
@@ -53,7 +53,7 @@ export const getMe = async (token: string) : Promise<TwitterUser> => {
     })
 
     if(!resp.ok) {
-        throw new Error("Failed to get me")
+        throw new Error(`Failed to get me ${resp.statusText}`)
     }
 
     const data = await resp.json() as GetMeResponse
@@ -73,7 +73,7 @@ export const getFollowers = async (token: string, userId: string) => {
 
     if(!resp.ok) {
         console.log(resp.statusText)
-        throw new Error("Failed to get followers")
+        throw new Error(`Failed to get followers ${resp.statusText}`)
     }
 
     const data = await resp.json()
